@@ -1,0 +1,7 @@
+/VPN.ini
+**/VPN.ini
+/Build/
+/tests/
+/.vs/
+__pycache__/
+*.user

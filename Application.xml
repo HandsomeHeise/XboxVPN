@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xex>
+  <baseaddr addr="0x814F0000"/>
+  <sysdll/>
+  <exportcontainer name="XboxVPN.xex"/>
+  <format><compressed/></format>
+  <mediatypes><default/><allpackages/></mediatypes>
+  <gameregion><all/></gameregion>
+</xex>

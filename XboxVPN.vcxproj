@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Xbox 360">
+      <Configuration>Release</Configuration>
+      <Platform>Xbox 360</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{336B1F6B-2D32-4D49-99C1-5F3F98486D1E}</ProjectGuid>
+    <Keyword>Xbox360Proj</Keyword>
+    <ProjectName>XboxVPN</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>2010-01</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <OutDir>$(ProjectDir)Build\</OutDir>
+    <IntDir>$(OutDir)Intermediate\</IntDir>
+    <OutputFile>$(IntDir)XboxVPN.exe</OutputFile>
+    <ImageXexOutput>$(OutDir)XboxVPN.xex</ImageXexOutput>
+    <LinkIncremental>false</LinkIncremental>
+    <DeployOnBuild>false</DeployOnBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MinSpace</Optimization>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PreprocessorDefinitions>_XBOX;NDEBUG;NOD3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>xapilib.lib;xboxkrnl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/DLL /ALIGN:4096 /INCLUDE:XboxKrnlBuildNumber /PDBALTPATH:XboxVPN.pdb %(AdditionalOptions)</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)XboxVPN.pdb</ProgramDatabaseFile>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SetChecksum>true</SetChecksum>
+    </Link>
+    <ImageXex>
+      <ConfigurationFile>$(ProjectDir)Application.xml</ConfigurationFile>
+    </ImageXex>
+    <Deploy>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </Deploy>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Entry.cpp" />
+    <ClCompile Include="src\Runtime.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Packet.cpp" />
+    <ClCompile Include="third_party\wireguard\src\crypto.c;third_party\wireguard\src\wireguard.c;
+                        third_party\wireguard\src\crypto\refc\blake2s.c;
+                        third_party\wireguard\src\crypto\refc\chacha20.c;
+                        third_party\wireguard\src\crypto\refc\chacha20poly1305.c;
+                        third_party\wireguard\src\crypto\refc\poly1305-donna.c;
+                        third_party\wireguard\src\crypto\refc\x25519.c">
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4018;4146;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ClInclude Include="src\*.h" />
+    <None Include="Application.xml" />
+    <None Include="NoConsoleDeploy.targets" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(ProjectDir)NoConsoleDeploy.targets" />
+</Project>
